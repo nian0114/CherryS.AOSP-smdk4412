@@ -40,9 +40,6 @@
 #include "wm8994.h"
 #include "wm_hubs.h"
 
-#include "boeffla_sound.h"
-
-
 #define WM1811_JACKDET_MODE_NONE  0x0000
 #define WM1811_JACKDET_MODE_JACK  0x0100
 #define WM1811_JACKDET_MODE_MIC   0x0080
@@ -202,8 +199,6 @@ static int wm8994_write(struct snd_soc_codec *codec, unsigned int reg,
 	int ret;
 
 	BUG_ON(reg > WM8994_MAX_REGISTER);
-
-	value = Boeffla_sound_hook_wm8994_write(reg, value);
 
 	if (!wm8994_volatile(codec, reg)) {
 		ret = snd_soc_cache_write(codec, reg, value);
@@ -837,8 +832,11 @@ SOC_SINGLE_TLV("MIXINL IN1RP Boost Volume", WM8994_INPUT_MIXER_1, 8, 1, 0,
 static void wm1811_jackdet_set_mode(struct snd_soc_codec *codec, u16 mode)
 {
 	struct wm8994_priv *wm8994 = snd_soc_codec_get_drvdata(codec);
-
+#ifdef CONFIG_USE_ADC_DET
+	if (!wm8994->jackdet || !wm8994->micdet[0].jack)
+#else
 	if (!wm8994->jackdet || !wm8994->jack_cb)
+#endif
 		return;
 
 	if (wm8994->active_refcount)
@@ -3628,6 +3626,90 @@ static irqreturn_t wm1811_jackdet_irq(int irq, void *data)
  * flexiblity a callback is provided which allows a completely custom
  * detection algorithm.
  */
+#ifdef CONFIG_USE_ADC_DET
+int wm8958_mic_detect(struct snd_soc_codec *codec, struct snd_soc_jack *jack,
+		      wm1811_micdet_cb det_cb, void *det_cb_data,
+		      wm1811_mic_id_cb id_cb, void *id_cb_data)
+{
+	struct wm8994_priv *wm8994 = snd_soc_codec_get_drvdata(codec);
+	struct wm8994 *control = codec->control_data;
+	u16 micd_lvl_sel;
+
+	switch (control->type) {
+	case WM1811:
+	case WM8958:
+		break;
+	default:
+		return -EINVAL;
+	}
+
+	if (jack) {
+		snd_soc_dapm_force_enable_pin(&codec->dapm, "CLK_SYS");
+		snd_soc_dapm_sync(&codec->dapm);
+
+		wm8994->micdet[0].jack = jack;
+
+		if (det_cb) {
+			wm8994->micd_cb = det_cb;
+			wm8994->micd_cb_data = det_cb_data;
+		} else {
+			wm8994->mic_detecting = true;
+			wm8994->jack_mic = false;
+		}
+
+		if (id_cb) {
+			wm8994->mic_id_cb = id_cb;
+			wm8994->mic_id_cb_data = id_cb_data;
+		} else {
+			wm8994->mic_id_cb = wm8958_mic_id;
+			wm8994->mic_id_cb_data = codec;
+		}
+
+		wm8958_micd_set_rate(codec);
+
+		/* Detect microphones and short circuits by default */
+		if (wm8994->pdata->micd_lvl_sel)
+			micd_lvl_sel = wm8994->pdata->micd_lvl_sel;
+		else
+			micd_lvl_sel = 0x41;
+
+		wm8994->btn_mask = SND_JACK_BTN_0 | SND_JACK_BTN_1 |
+			SND_JACK_BTN_2 | SND_JACK_BTN_3 |
+			SND_JACK_BTN_4 | SND_JACK_BTN_5;
+
+		snd_soc_update_bits(codec, WM8958_MIC_DETECT_2,
+				    WM8958_MICD_LVL_SEL_MASK, micd_lvl_sel);
+
+		WARN_ON(codec->dapm.bias_level > SND_SOC_BIAS_STANDBY);
+
+		/*
+		 * If we can use jack detection start off with that,
+		 * otherwise jump straight to microphone detection.
+		 */
+		if (wm8994->jackdet) {
+			snd_soc_update_bits(codec, WM8958_MICBIAS2,
+					    WM8958_MICB2_DISCH,
+					    WM8958_MICB2_DISCH);
+			snd_soc_update_bits(codec, WM8994_LDO_1,
+					    WM8994_LDO1_DISCH, 0);
+			wm1811_jackdet_set_mode(codec,
+						WM1811_JACKDET_MODE_JACK);
+		} else {
+			snd_soc_update_bits(codec, WM8958_MIC_DETECT_1,
+					    WM8958_MICD_ENA, WM8958_MICD_ENA);
+		}
+
+	} else {
+		snd_soc_update_bits(codec, WM8958_MIC_DETECT_1,
+				    WM8958_MICD_ENA, 0);
+		wm1811_jackdet_set_mode(codec, WM1811_JACKDET_MODE_NONE);
+		snd_soc_dapm_disable_pin(&codec->dapm, "CLK_SYS");
+		snd_soc_dapm_sync(&codec->dapm);
+	}
+
+	return 0;
+}
+#else
 int wm8958_mic_detect(struct snd_soc_codec *codec, struct snd_soc_jack *jack,
 		      wm8958_micdet_cb cb, void *cb_data)
 {
@@ -3704,6 +3786,7 @@ int wm8958_mic_detect(struct snd_soc_codec *codec, struct snd_soc_jack *jack,
 
 	return 0;
 }
+#endif
 EXPORT_SYMBOL_GPL(wm8958_mic_detect);
 
 static irqreturn_t wm8958_mic_irq(int irq, void *data)
@@ -4221,8 +4304,6 @@ static int wm8994_codec_probe(struct snd_soc_codec *codec)
 					ARRAY_SIZE(wm8958_intercon));
 		break;
 	}
-
-	Boeffla_sound_hook_wm8994_pcm_probe(codec);
 
 	return 0;
 

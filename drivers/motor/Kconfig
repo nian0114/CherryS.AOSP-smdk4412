@@ -30,7 +30,3 @@ config MOTOR_DRV_ISA1200
 	help
 	  Say Y to enalbe the ISA1200 IC.
 
-config TWEAK_VIB_CTRL
-	bool "vib control"
-	default y
-

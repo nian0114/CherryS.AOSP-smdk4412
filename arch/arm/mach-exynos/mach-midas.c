@@ -328,7 +328,7 @@ static void touchkey_init_hw(void)
 	if (system_rev < 3)
 		gpio_request(GPIO_3_TOUCH_EN_R1, "gpio_3_touch_en");
 	else
-	gpio_request(GPIO_3_TOUCH_EN, "gpio_3_touch_en");
+		gpio_request(GPIO_3_TOUCH_EN, "gpio_3_touch_en");
 #else
 	gpio_request(GPIO_3_TOUCH_EN, "gpio_3_touch_en");
 #endif
@@ -424,10 +424,10 @@ static int touchkey_led_power_on(bool on)
 		else
 			gpio_direction_output(GPIO_3_TOUCH_EN_R1, 0);
 	} else {
-	if (on)
-		gpio_direction_output(GPIO_3_TOUCH_EN, 1);
-	else
-		gpio_direction_output(GPIO_3_TOUCH_EN, 0);
+		if (on)
+			gpio_direction_output(GPIO_3_TOUCH_EN, 1);
+		else
+			gpio_direction_output(GPIO_3_TOUCH_EN, 0);
 	}
 #else
 	if (on)
@@ -1565,9 +1565,7 @@ static struct samsung_battery_platform_data samsung_battery_pdata = {
 #endif
 
 	.chg_curr_usb = 475,
-	.in_curr_usb = 475,
 	.chg_curr_cdp = 1000,
-	.in_curr_cdp = 1000,
 #if defined(CONFIG_MACH_T0_USA_VZW)
 	.chg_curr_wpc = 650,
 #else

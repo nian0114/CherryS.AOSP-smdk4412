@@ -109,10 +109,6 @@ config FB_S5P_MDNIE
 	---help---
 	This enables support for Samsung MDNIE feature
 
-config TWEAK_MDNIE_CTRL
-        bool "mdnie control"
-        default "y"
-
 config FB_MDNIE_PWM
 	bool "Samsung MDNIE PWM"
 	depends on FB_S5P
@@ -277,6 +273,12 @@ config FB_S5P_S6E63M0
        ---help---
          This enables support for Samsung S6E63M0 MIPI LCD
 
+config FB_S5P_NT71391
+	bool "NT71391 MIPI LCD"
+	depends on FB_S5P_MIPI_DSIM
+	---help---
+	  This enables support for Novatek NT71391 MIPI LCD
+
 endchoice
 
 choice
@@ -356,8 +358,3 @@ config FB_S5P_V2_TL2796
 	---help---
 	  This enables support for Samsung  TL2796 WVGA LCD panel
 endchoice
-
-config LCD_CONTROL
-	bool "lcd control"
-	depends on FB_S5P_LD9040
-	default n

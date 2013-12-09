@@ -268,10 +268,8 @@ int diag_bridge_write(char *data, int size)
 	struct urb		*urb = NULL;
 	unsigned int		pipe;
 	struct diag_bridge	*dev = __dev;
-	struct usb_device	*udev;
 	int			ret;
 	int			spin;
-
 
 	if (!dev || !dev->udev)
 		return -ENODEV;
@@ -307,13 +305,6 @@ int diag_bridge_write(char *data, int size)
 		return -ENOMEM;
 	}
 
-	udev = interface_to_usbdev(dev->ifc);
-	/* if dev handling suspend wait for suspended or active*/
-	if (pm_dev_runtime_get_enabled(udev) < 0) {
-		usb_free_urb(urb);
-		return -EAGAIN;
-	}
-
 	ret = usb_autopm_get_interface_async(dev->ifc);
 	if (ret < 0) {
 		dev_err(&dev->udev->dev, "autopm_get failed:%d\n", ret);
@@ -321,7 +312,7 @@ int diag_bridge_write(char *data, int size)
 		return ret;
 	}
 
-	for (spin = 0; spin < 50; spin++) {
+	for (spin = 0; spin < 10; spin++) {
 		/* check rpm active */
 		if (dev->udev->dev.power.runtime_status == RPM_ACTIVE) {
 			ret = 0;

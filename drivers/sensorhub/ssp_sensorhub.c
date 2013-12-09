@@ -15,6 +15,12 @@
 
 #include "ssp.h"
 
+static const struct fast_data {
+	char library_data[3];
+} fast_data_table[] = {
+	{ { 1, 1, 7 } },
+};
+
 static ssize_t ssp_sensorhub_write(struct file *file, const char __user *buf,
 				size_t count, loff_t *pos)
 {
@@ -150,6 +156,23 @@ static void ssp_report_sensorhub_length(struct ssp_sensorhub_data *hub_data,
 	pr_info("%s = %d", __func__, length);
 }
 
+static int ssp_sensorhub_is_fast_data(char *data, int start)
+{
+	int i, j;
+
+	for (i = 0; i < ARRAY_SIZE(fast_data_table); i++) {
+		for (j = 0; j < sizeof(fast_data_table[0]); j++) {
+			if (data[start + j] !=
+				fast_data_table[i].library_data[j])
+				break;
+		}
+		if (j == sizeof(fast_data_table[0]))
+			return i;
+	}
+
+	return -EINVAL;
+}
+
 static int ssp_queue_sensorhub_events(struct ssp_sensorhub_data *hub_data,
 				char *dataframe, int start, int end)
 {
@@ -157,6 +180,7 @@ static int ssp_queue_sensorhub_events(struct ssp_sensorhub_data *hub_data,
 	int length = end - start;
 	int event_number = hub_data->event_number;
 	int events = 0;
+	int ret = 0;
 	int i = 0;
 
 	if (length <= 0) {
@@ -174,7 +198,11 @@ static int ssp_queue_sensorhub_events(struct ssp_sensorhub_data *hub_data,
 	if (events >= LIBRARY_MAX_NUM) {
 		pr_info("%s: queue is full", __func__);
 		hub_data->transfer_ready++;
-		return -ENOMEM;
+		ret = ssp_sensorhub_is_fast_data(dataframe, start);
+		if (ret >= 0)
+			event_number = LIBRARY_MAX_NUM + ret;
+		else
+			return -ENOMEM;
 	}
 
 	/* allocate memory for new event */
@@ -197,18 +225,26 @@ static int ssp_queue_sensorhub_events(struct ssp_sensorhub_data *hub_data,
 	}
 	hub_data->events[event_number].length = length;
 
-	/* add new event at the end of queue */
-	spin_lock_bh(&hub_data->sensorhub_lock);
-	list_add_tail(&hub_data->events[event_number].list,
-		&hub_data->events_head.list);
-	hub_data->transfer_ready = 0;
-	spin_unlock_bh(&hub_data->sensorhub_lock);
+	if (events <= LIBRARY_MAX_NUM) {
+		/* add new event at the end of queue */
+		spin_lock_bh(&hub_data->sensorhub_lock);
+		list_add_tail(&hub_data->events[event_number].list,
+			&hub_data->events_head.list);
+		if (events++ < LIBRARY_MAX_NUM)
+			hub_data->transfer_ready = 0;
+		spin_unlock_bh(&hub_data->sensorhub_lock);
 
-	/* do not exceed max queue number */
-	if (hub_data->event_number++ >= LIBRARY_MAX_NUM - 1)
-		hub_data->event_number = 0;
+		/* do not exceed max queue number */
+		if (hub_data->event_number++ >= LIBRARY_MAX_NUM - 1)
+			hub_data->event_number = 0;
+	} else {
+		spin_lock_bh(&hub_data->sensorhub_lock);
+		list_replace(hub_data->events_head.list.prev,
+				&hub_data->events[event_number].list);
+		spin_unlock_bh(&hub_data->sensorhub_lock);
+	}
 
-	pr_info("%s: total %d events", __func__, events + 1);
+	pr_info("%s: total %d events", __func__, events);
 	return events;
 }
 
@@ -358,11 +394,9 @@ static int ssp_senosrhub_thread_func(void *arg)
 		/* report sensorhub event to user */
 		if (hub_data->transfer_ready == 0) {
 			/* first in first out */
-			spin_lock_bh(&hub_data->sensorhub_lock);
 			hub_data->first_event
 				= list_first_entry(&hub_data->events_head.list,
 						struct sensorhub_event, list);
-			spin_unlock_bh(&hub_data->sensorhub_lock);
 			if (IS_ERR(hub_data->first_event)) {
 				pr_err("%s: first event err(%ld)", __func__,
 					PTR_ERR(hub_data->first_event));

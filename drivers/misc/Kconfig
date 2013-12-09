@@ -702,13 +702,6 @@ config MPU_SENSORS_MPU6050
     tristate "MPU6050"
     depends on I2C
 
-config GENERIC_BLN
-       bool "Generic BLN support for backlight notification"
-       default n
-       help
-         Say Y here to enable the backlight notification
-         for android led-notification (modified liblight needed)
-
 source "drivers/misc/c2port/Kconfig"
 source "drivers/misc/eeprom/Kconfig"
 source "drivers/misc/cb710/Kconfig"
@@ -742,11 +735,5 @@ config SLP_PROCESS_MON
 	help
 	  Providing monitoring important processes. Users can register the process
 	  with sysfs.
-
-config TOUCH_WAKE
-	bool "Support for Touch Wake"
-	default y
-	help
-		Say Y here to enable Touch Wake
 
 endif # MISC_DEVICES

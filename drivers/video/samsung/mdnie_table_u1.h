@@ -3,7 +3,7 @@
 
 #include "mdnie.h"
 
-#if 0
+
 static const unsigned short tune_cyanogenmod[] = {
 	/*start */
 	0x0001, 0x0000, /* */
@@ -20,7 +20,6 @@ static const unsigned short tune_cyanogenmod[] = {
 	/*end */
 	END_SEQ, 0x0000,
 };
-#endif
 
 static const unsigned short tune_dynamic_gallery[] = {
 	/*start U1 dynamic gallery */
@@ -1013,27 +1012,10 @@ static const unsigned short tune_warm_outdoor[] = {
 	END_SEQ, 0x0000,
 };
 
-#ifdef CONFIG_TWEAK_MDNIE_CTRL
-static const unsigned short tune_normal[] = {
-	/*start U1 normal */
-	0x0001, 0x0044, /*SCR MCM HDTR */
-	0x005b, 0x0064, /*MCM */
-	0x0063, 0x8000, /*cb */
-	0x0065, 0x0080, /*cr */
-	0x0028, 0x0000, /*Register Mask */
-	/*end */
-	END_SEQ, 0x0000,
-};
-#endif
-
 struct mdnie_tunning_info etc_table[CABC_MAX][OUTDOOR_MAX][TONE_MAX] = {
 	{
 		{
-#ifdef CONFIG_TWEAK_MDNIE_CTRL
-			{"NORMAL",		tune_normal},
-#else
 			{"NORMAL",		NULL},
-#endif
 			{"WARM",		tune_warm},
 			{"COLD",		tune_cold},
 		},
@@ -1048,7 +1030,7 @@ struct mdnie_tunning_info etc_table[CABC_MAX][OUTDOOR_MAX][TONE_MAX] = {
 struct mdnie_tunning_info tunning_table[CABC_MAX][MODE_MAX][SCENARIO_MAX] = {
 	{
 		{
-			{"CYANOGENMOD",		tune_dynamic_ui},
+			{"CYANOGENMOD",		tune_cyanogenmod},
 			{"DYNAMIC_UI",		tune_dynamic_ui},
 			{"DYNAMIC_VIDEO",	tune_dynamic_video},
 			{"DYNAMIC_VIDEO",	tune_dynamic_video},
@@ -1058,7 +1040,7 @@ struct mdnie_tunning_info tunning_table[CABC_MAX][MODE_MAX][SCENARIO_MAX] = {
 			{"DYNAMIC_GALLERY",	tune_dynamic_gallery},
 			{"DYNAMIC_VT",		tune_dynamic_vt},
 		}, {
-			{"CYANOGENMOD",		tune_standard_ui},
+			{"CYANOGENMOD",		tune_cyanogenmod},
 			{"STANDARD_UI",		tune_standard_ui},
 			{"STANDARD_VIDEO",	tune_standard_video},
 			{"STANDARD_VIDEO",	tune_standard_video},
@@ -1068,7 +1050,7 @@ struct mdnie_tunning_info tunning_table[CABC_MAX][MODE_MAX][SCENARIO_MAX] = {
 			{"STANDARD_GALLERY",	tune_standard_gallery},
 			{"STANDARD_VT",		tune_standard_vt},
 		}, {
-			{"CYANOGENMOD",		tune_natural_ui},
+			{"CYANOGENMOD",		tune_cyanogenmod},
 			{"NATURAL_UI",		tune_natural_ui},
 			{"NATURAL_VIDEO",	tune_natural_video},
 			{"NATURAL_VIDEO",	tune_natural_video},
@@ -1078,7 +1060,7 @@ struct mdnie_tunning_info tunning_table[CABC_MAX][MODE_MAX][SCENARIO_MAX] = {
 			{"NATURAL_GALLERY",	tune_natural_gallery},
 			{"NATURAL_VT",		tune_natural_vt},
 		}, {
-			{"CYANOGENMOD",		tune_movie_ui},
+			{"CYANOGENMOD",		tune_cyanogenmod},
 			{"MOVIE_UI",		tune_movie_ui},
 			{"MOVIE_VIDEO",		tune_movie_video},
 			{"MOVIE_VIDEO",		tune_movie_video},

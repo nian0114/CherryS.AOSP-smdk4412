@@ -63,9 +63,6 @@ enum cpufreq_lock_ID {
 	 * implementation in CPUFREQ framework of QoS.
 	 */
 	DVFS_LOCK_ID_QOS_DMA_LATENCY,
-#if defined(CONFIG_SND_FREQ_LOCK)
-	DVFS_LOCK_ID_SND,	/* SND */
-#endif
 	DVFS_LOCK_ID_END,
 };
 
