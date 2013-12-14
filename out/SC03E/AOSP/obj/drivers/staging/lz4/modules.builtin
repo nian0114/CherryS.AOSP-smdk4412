@@ -1,0 +1,2 @@
+kernel/drivers/staging/lz4/lz4_compress.ko
+kernel/drivers/staging/lz4/lz4_decompress.ko

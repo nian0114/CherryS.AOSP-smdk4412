@@ -1,0 +1,2 @@
+kernel/drivers/misc/lkdtm.ko
+kernel/drivers/misc/tzic.ko

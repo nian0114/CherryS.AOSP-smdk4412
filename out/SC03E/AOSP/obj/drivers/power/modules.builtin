@@ -1,0 +1,2 @@
+kernel/drivers/power/power_supply.ko
+kernel/drivers/power/samsung_fake_battery.ko

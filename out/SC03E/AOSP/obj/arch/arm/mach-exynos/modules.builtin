@@ -1,0 +1,2 @@
+kernel/arch/arm/mach-exynos/midas-nfc.ko
+kernel/arch/arm/mach-exynos/dev-ion.ko

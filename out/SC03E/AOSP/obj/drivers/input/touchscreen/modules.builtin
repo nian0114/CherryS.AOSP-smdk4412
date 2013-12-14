@@ -1,0 +1,2 @@
+kernel/drivers/input/touchscreen/mms_ts.ko
+kernel/drivers/input/touchscreen/touchboost_switch.ko

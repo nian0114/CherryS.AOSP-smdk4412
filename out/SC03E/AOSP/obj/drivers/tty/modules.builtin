@@ -1,0 +1,4 @@
+kernel/drivers/tty/serial/serial_core.ko
+kernel/drivers/tty/serial/8250.ko
+kernel/drivers/tty/serial/samsung.ko
+kernel/drivers/tty/serial/s5pv210.ko

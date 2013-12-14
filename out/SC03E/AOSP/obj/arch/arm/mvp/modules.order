@@ -1,0 +1,3 @@
+kernel/arch/arm/mvp/mvpkm/mvpkm.ko
+kernel/arch/arm/mvp/commkm/commkm.ko
+kernel/arch/arm/mvp/pvtcpkm/pvtcpkm.ko

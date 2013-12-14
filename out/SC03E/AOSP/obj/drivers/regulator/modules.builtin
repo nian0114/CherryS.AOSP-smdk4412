@@ -1,0 +1,4 @@
+kernel/drivers/regulator/fixed.ko
+kernel/drivers/regulator/max77686.ko
+kernel/drivers/regulator/max77693.ko
+kernel/drivers/regulator/wm8994-regulator.ko

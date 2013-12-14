@@ -1,0 +1,2 @@
+kernel/drivers/motor/max77693_haptic.ko
+kernel/drivers/motor/vibrator.ko

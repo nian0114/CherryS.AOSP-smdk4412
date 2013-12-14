@@ -1,0 +1,5 @@
+kernel/drivers/battery/samsung_battery.ko
+kernel/drivers/battery/battery-factory.ko
+kernel/drivers/battery/max17047_fuelgauge.ko
+kernel/drivers/battery/max77693_charger.ko
+kernel/drivers/battery/charge_control.ko
