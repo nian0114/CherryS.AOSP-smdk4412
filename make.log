@@ -1,0 +1,479 @@
+  GEN     /home/nian/CherryS/out/SC03E/AOSP/obj/Makefile
+  CHK     include/linux/version.h
+  CHK     include/generated/utsrelease.h
+  Using /home/nian/CherryS as source for kernel
+make[2]: “include/generated/mach-types.h”是最新的。
+  CALL    /home/nian/CherryS/scripts/checksyscalls.sh
+  CHK     include/generated/compile.h
+/home/nian/CherryS/drivers/gpu/mali400/r3p2/mali/Kbuild:47: Current directory is /home/nian/CherryS/drivers/gpu/mali400/r3p2/mali from /home/nian/CherryS/out/SC03E/AOSP/obj
+  CC      drivers/gpu/mali400/r3p2/ump/linux/ump_kernel_linux.o
+  LD      drivers/input/input-core.o
+  CC      drivers/input/touchscreen/mms_ts.o
+  CC      drivers/input/touchscreen/touchboost_switch.o
+  CC      drivers/gpu/mali400/r3p2/ump/linux/ump_memory_backend.o
+/home/nian/CherryS/drivers/input/touchscreen/mms_ts.c: In function 'mms100_open_mbinary':
+/home/nian/CherryS/drivers/input/touchscreen/mms_ts.c:1241:7: warning: unused variable 'file_name' [-Wunused-variable]
+/home/nian/CherryS/drivers/input/touchscreen/mms_ts.c:1240:6: warning: unused variable 'i' [-Wunused-variable]
+/home/nian/CherryS/drivers/input/touchscreen/mms_ts.c: In function 'mms_ts_fw_info':
+/home/nian/CherryS/drivers/input/touchscreen/mms_ts.c:1842:22: warning: unused variable 'adapter' [-Wunused-variable]
+/home/nian/CherryS/drivers/input/touchscreen/mms_ts.c: In function 'mms_ts_fw_load':
+/home/nian/CherryS/drivers/input/touchscreen/mms_ts.c:1878:22: warning: unused variable 'adapter' [-Wunused-variable]
+/home/nian/CherryS/drivers/input/touchscreen/mms_ts.c: In function 'fw_update':
+/home/nian/CherryS/drivers/input/touchscreen/mms_ts.c:2311:1: warning: label 'do_not_need_update' defined but not used [-Wunused-label]
+/home/nian/CherryS/drivers/input/touchscreen/mms_ts.c: In function 'get_fw_ver_bin':
+/home/nian/CherryS/drivers/input/touchscreen/mms_ts.c:2322:6: warning: unused variable 'hw_rev' [-Wunused-variable]
+/home/nian/CherryS/drivers/input/touchscreen/mms_ts.c: In function 'mms_ts_resume':
+/home/nian/CherryS/drivers/input/touchscreen/mms_ts.c:2959:7: warning: unused variable 'ret' [-Wunused-variable]
+/home/nian/CherryS/drivers/input/touchscreen/mms_ts.c: At top level:
+/home/nian/CherryS/drivers/input/touchscreen/mms_ts.c:310:13: warning: 'dvfs_lock_status' defined but not used [-Wunused-variable]
+/home/nian/CherryS/drivers/input/touchscreen/mms_ts.c:311:13: warning: 'press_status' defined but not used [-Wunused-variable]
+/home/nian/CherryS/drivers/input/touchscreen/mms_ts.c:328:13: warning: 'module_off_master' declared 'static' but never defined [-Wunused-function]
+/home/nian/CherryS/drivers/input/touchscreen/mms_ts.c:329:13: warning: 'module_on_master' declared 'static' but never defined [-Wunused-function]
+/home/nian/CherryS/drivers/input/touchscreen/mms_ts.c:330:13: warning: 'module_off_slave' declared 'static' but never defined [-Wunused-function]
+/home/nian/CherryS/drivers/input/touchscreen/mms_ts.c:331:13: warning: 'module_on_slave' declared 'static' but never defined [-Wunused-function]
+/home/nian/CherryS/drivers/input/touchscreen/mms_ts.c:1779:12: warning: 'mms_ts_enable' defined but not used [-Wunused-function]
+/home/nian/CherryS/drivers/input/touchscreen/mms_ts.c:1796:12: warning: 'mms_ts_disable' defined but not used [-Wunused-function]
+/home/nian/CherryS/drivers/input/touchscreen/mms_ts.c:1839:12: warning: 'mms_ts_fw_info' defined but not used [-Wunused-function]
+/home/nian/CherryS/drivers/input/touchscreen/mms_ts.c:2066:12: warning: 'get_raw_data_one' defined but not used [-Wunused-function]
+  LD      drivers/gpu/mali400/r3p2/ump/ump.o
+  CC      drivers/mfd/wm8994-core.o
+  CC      drivers/misc/lkdtm.o
+  LD      drivers/input/touchscreen/built-in.o
+  CC      drivers/motor/max77693_haptic.o
+  CC      drivers/net/mii.o
+  CC      drivers/mmc/card/block.o
+/home/nian/CherryS/drivers/motor/max77693_haptic.c: In function 'haptic_timer_func':
+/home/nian/CherryS/drivers/motor/max77693_haptic.c:119:16: warning: unused variable 'flags' [-Wunused-variable]
+  LD      drivers/input/built-in.o
+  CC      drivers/motor/tspdrv.o
+  CC      drivers/nfc/pn65n.o
+  CC      drivers/mfd/wm8994-irq.o
+  LD      drivers/gpu/mali400/r3p2/ump/built-in.o
+  CC      drivers/mfd/mfd-core.o
+  CC      drivers/mfd/max77686.o
+  CC      drivers/net/Space.o
+  CC      drivers/mfd/max77686-irq.o
+  CC      drivers/misc/uid_stat.o
+  LD      drivers/nfc/built-in.o
+  LD      drivers/platform/built-in.o
+  CC      drivers/mfd/max77693.o
+  CC      drivers/mfd/max77693-irq.o
+  LD      drivers/motor/vibrator.o
+  CC      drivers/power/power_supply_core.o
+  LD      drivers/motor/built-in.o
+  LD      drivers/misc/2mic/built-in.o
+  CC      drivers/net/loopback.o
+  CC      drivers/regulator/core.o
+  LD      drivers/misc/carma/built-in.o
+  CC      drivers/power/power_supply_sysfs.o
+  LD      drivers/misc/cb710/built-in.o
+  LD      drivers/misc/eeprom/built-in.o
+  LD      drivers/misc/lis3lv02d/built-in.o
+  LD      drivers/misc/ti-st/built-in.o
+/home/nian/CherryS/drivers/mmc/card/block.c: In function 'mmc_blk_issue_rq':
+/home/nian/CherryS/drivers/mmc/card/block.c:1032:18: warning: 'arg' may be used uninitialized in this function [-Wmaybe-uninitialized]
+  CC      drivers/misc/max77693-muic.o
+/home/nian/CherryS/drivers/mmc/card/block.c:998:25: note: 'arg' was declared here
+/home/nian/CherryS/drivers/mmc/card/block.c:1031:6: warning: 'nr' may be used uninitialized in this function [-Wmaybe-uninitialized]
+/home/nian/CherryS/drivers/mmc/card/block.c:998:21: note: 'nr' was declared here
+/home/nian/CherryS/drivers/mmc/card/block.c:1031:6: warning: 'from' may be used uninitialized in this function [-Wmaybe-uninitialized]
+/home/nian/CherryS/drivers/mmc/card/block.c:998:15: note: 'from' was declared here
+  CC      drivers/misc/tzic.o
+  LD      drivers/mfd/built-in.o
+  CC      drivers/power/samsung_fake_battery.o
+  CC      drivers/rtc/rtc-lib.o
+  CC      drivers/sensor/sensors_core.o
+  CC      drivers/net/ppp_generic.o
+  CC      drivers/scsi/scsi.o
+  CC      drivers/mmc/card/queue.o
+/home/nian/CherryS/drivers/misc/max77693-muic.c: In function 'uart_switch_init':
+/home/nian/CherryS/drivers/misc/max77693-muic.c:3112:11: warning: unused variable 'val' [-Wunused-variable]
+/home/nian/CherryS/drivers/misc/max77693-muic.c:3112:6: warning: unused variable 'ret' [-Wunused-variable]
+/home/nian/CherryS/drivers/misc/max77693-muic.c: At top level:
+/home/nian/CherryS/drivers/misc/max77693-muic.c:316:12: warning: 'max77693_muic_set_usb_path_pass2' defined but not used [-Wunused-function]
+/home/nian/CherryS/drivers/misc/max77693-muic.c:326:12: warning: 'max77693_muic_get_usb_path_pass2' defined but not used [-Wunused-function]
+/home/nian/CherryS/drivers/misc/max77693-muic.c:352:12: warning: 'max77693_muic_get_uart_path_pass2' defined but not used [-Wunused-function]
+  CC      drivers/spi/spi.o
+  CC      drivers/misc/touch_wake.o
+  CC      drivers/sensor/lsm330dlc_accel.o
+  CC      drivers/rtc/hctosys.o
+  LD      drivers/power/power_supply.o
+  LD      drivers/power/built-in.o
+  CC      drivers/staging/staging.o
+  LD      drivers/gpu/built-in.o
+  CC      drivers/rtc/class.o
+  CC      drivers/regulator/dummy.o
+  CC      drivers/staging/android/binder.o
+  CC      drivers/sensor/lsm330dlc_gyro.o
+  CC      drivers/scsi/hosts.o
+  CC      drivers/switch/switch_class.o
+  CC      drivers/spi/spi_bitbang.o
+  CC      drivers/mmc/card/cprmdrv_samsung.o
+  CC      drivers/regulator/fixed.o
+  LD      drivers/misc/built-in.o
+  CC      drivers/thermal/thermal_sys.o
+  CC      drivers/sensor/ak8975.o
+  CC      drivers/rtc/interface.o
+  CC      drivers/regulator/max77686.o
+  LD      drivers/mmc/card/mmc_block.o
+  LD      drivers/mmc/card/built-in.o
+  CC      drivers/switch/switch_gpio.o
+  CC      drivers/spi/spi_gpio.o
+  CC      drivers/mmc/core/core.o
+  CC      drivers/sensor/cm36651.o
+  CC      drivers/net/ppp_deflate.o
+  LD      drivers/switch/built-in.o
+  CC      drivers/rtc/rtc-dev.o
+  CC      drivers/scsi/scsi_ioctl.o
+  CC      drivers/tty/tty_io.o
+  CC      drivers/spi/spi_s3c64xx.o
+  CC      drivers/net/bsd_comp.o
+  CC      drivers/sensor/lps331ap.o
+  CC      drivers/regulator/max77693.o
+  CC      drivers/rtc/rtc-proc.o
+  CC      drivers/spi/spidev.o
+  LD      drivers/thermal/built-in.o
+/home/nian/CherryS/drivers/regulator/max77693.c: In function 'max77693_pmic_probe':
+/home/nian/CherryS/drivers/regulator/max77693.c:517:2: warning: label 'err_alloc' defined but not used [-Wunused-label]
+  CC      drivers/scsi/constants.o
+  CC      drivers/usb/class/usblp.o
+  CC      drivers/net/ppp_mppe.o
+  CC      drivers/rtc/rtc-sysfs.o
+  CC      drivers/regulator/wm8994-regulator.o
+  LD      drivers/sensor/built-in.o
+  LD      drivers/spi/built-in.o
+  CC      drivers/watchdog/s3c2410_wdt.o
+  CC      drivers/rtc/alarm.o
+  CC      drivers/video/fb_notify.o
+/home/nian/CherryS/drivers/regulator/wm8994-regulator.c: In function 'wm8994_ldo1_get_voltage_sel':
+/home/nian/CherryS/drivers/regulator/wm8994-regulator.c:98:6: warning: unused variable 'val' [-Wunused-variable]
+/home/nian/CherryS/drivers/regulator/wm8994-regulator.c: In function 'wm8994_ldo2_get_voltage_sel':
+/home/nian/CherryS/drivers/regulator/wm8994-regulator.c:168:6: warning: unused variable 'val' [-Wunused-variable]
+  CC      drivers/net/pppox.o
+  LD      drivers/usb/class/built-in.o
+  LD      drivers/regulator/built-in.o
+  CC      drivers/scsi/scsicam.o
+  CC      drivers/usb/gadget/s3c_udc_otg.o
+  CC      drivers/mmc/core/bus.o
+  CC      drivers/staging/android/logger.o
+  CC      drivers/usb/core/usb.o
+  CC      drivers/video/fbmem.o
+  CC      drivers/video/fbmon.o
+  LD      drivers/watchdog/built-in.o
+  CC      drivers/video/fbcmap.o
+  CC      drivers/tty/n_tty.o
+  CC      drivers/rtc/alarm-dev.o
+  CC      drivers/rtc/rtc-max77686.o
+  CC      drivers/mmc/core/host.o
+  CC      drivers/scsi/scsi_error.o
+  CC      drivers/video/fbsysfs.o
+  CC      drivers/net/pppolac.o
+  CC      drivers/usb/core/hub.o
+  CC      drivers/staging/android/ram_console.o
+  CC      drivers/rtc/rtc-s3c.o
+  CC      drivers/video/modedb.o
+  CC      drivers/mmc/core/mmc.o
+  CC      drivers/video/fbcvt.o
+  CC      drivers/tty/tty_ioctl.o
+  CC      drivers/net/pppopns.o
+  LD      drivers/rtc/rtc-core.o
+  LD      drivers/rtc/built-in.o
+  CC      drivers/net/slhc.o
+  CC      drivers/video/backlight/lcd.o
+  CC      drivers/net/tun.o
+  CC      drivers/usb/gadget/android.o
+  CC      drivers/staging/android/timed_output.o
+  CC      drivers/video/console/dummycon.o
+  CC      drivers/staging/android/timed_gpio.o
+  LD      drivers/net/arm/built-in.o
+  CC      drivers/scsi/scsi_lib.o
+  LD      drivers/video/display/built-in.o
+  LD      drivers/video/console/built-in.o
+  CC      drivers/net/usb/asix.o
+  CC      drivers/video/backlight/backlight.o
+  LD      drivers/video/omap2/displays/built-in.o
+  CC      drivers/video/samsung/s3cfb_main.o
+  CC      drivers/mmc/core/mmc_ops.o
+  LD      drivers/video/omap2/built-in.o
+  CC      drivers/video/samsung_extdisp/s3cfb_extdsp_main.o
+  CC      drivers/staging/android/lowmemorykiller.o
+In file included from /home/nian/CherryS/drivers/usb/gadget/android.c:65:0:
+/home/nian/CherryS/drivers/usb/gadget/f_diag.c: In function 'usb_config_work_func':
+/home/nian/CherryS/drivers/usb/gadget/f_diag.c:145:21: warning: unused variable 's' [-Wunused-variable]
+/home/nian/CherryS/drivers/usb/gadget/f_diag.c:144:29: warning: unused variable 'table' [-Wunused-variable]
+/home/nian/CherryS/drivers/usb/gadget/f_diag.c:143:28: warning: unused variable 'cdev' [-Wunused-variable]
+/home/nian/CherryS/drivers/usb/gadget/android.c: In function 'diag_function_bind_config':
+/home/nian/CherryS/drivers/usb/gadget/android.c:987:6: warning: unused variable 'once' [-Wunused-variable]
+  CC      drivers/tty/tty_ldisc.o
+  CC      drivers/video/samsung_extdisp/s3cfb_extdsp_ops.o
+  LD      drivers/staging/android/built-in.o
+  CC      drivers/net/usb/cdc_ether.o
+  CC      drivers/mmc/core/sd.o
+  LD      drivers/staging/generic_serial/built-in.o
+  CC      drivers/usb/core/hcd.o
+  LD      drivers/video/backlight/built-in.o
+  CC      drivers/video/cfbfillrect.o
+  CC      drivers/scsi/scsi_lib_dma.o
+  CC      drivers/video/samsung/s3cfb_ops.o
+  CC      drivers/staging/lz4/lz4_compress.o
+  CC      drivers/staging/lz4/lz4_decompress.o
+  LD      drivers/net/wireless/bcmdhd/built-in.o
+/home/nian/CherryS/drivers/video/samsung/s3cfb_ops.c: In function 's3c_fb_set_win_buffer':
+/home/nian/CherryS/drivers/video/samsung/s3cfb_ops.c:1584:6: warning: unused variable 'ret' [-Wunused-variable]
+/home/nian/CherryS/drivers/video/samsung/s3cfb_ops.c:1582:27: warning: unused variable 'prev_var' [-Wunused-variable]
+/home/nian/CherryS/drivers/video/samsung/s3cfb_ops.c:1581:27: warning: unused variable 'prev_fix' [-Wunused-variable]
+/home/nian/CherryS/drivers/video/samsung/s3cfb_ops.c: In function 's3cfb_ioctl':
+/home/nian/CherryS/drivers/video/samsung/s3cfb_ops.c:1760:20: warning: unused variable 'lcd' [-Wunused-variable]
+  CC [M]  drivers/net/wireless/bcmdhd/bcmsdh.o
+  CC      drivers/video/cfbcopyarea.o
+  CC      drivers/net/usb/net1080.o
+  CC      drivers/scsi/scsi_scan.o
+  CC [M]  drivers/net/wireless/bcmdhd/bcmsdh_linux.o
+  LD      drivers/video/samsung_extdisp/s3cfb_extdsp.o
+  LD      drivers/video/samsung_extdisp/built-in.o
+  CC      drivers/video/cfbimgblt.o
+  CC      drivers/tty/tty_buffer.o
+  CC      drivers/mmc/core/sd_ops.o
+  LD      drivers/staging/lz4/built-in.o
+  LD      drivers/video/fb.o
+  CC      drivers/mmc/core/sdio.o
+  CC      drivers/net/usb/cdc_subset.o
+  LD      drivers/staging/tty/built-in.o
+  CC [M]  drivers/net/wireless/bcmdhd/bcmsdh_sdmmc.o
+  CC      drivers/mmc/core/sdio_ops.o
+  CC      drivers/usb/core/urb.o
+  CC      drivers/staging/zcache/zcache-main.o
+  CC      drivers/video/samsung/lcdfreq.o
+  CC [M]  drivers/net/wireless/bcmdhd/bcmsdh_sdmmc_linux.o
+  CC      drivers/tty/tty_port.o
+  CC      drivers/scsi/scsi_sysfs.o
+  CC      drivers/staging/zram/zram_drv.o
+  CC      drivers/net/usb/zaurus.o
+  CC      drivers/mmc/core/sdio_bus.o
+  CC      drivers/usb/core/message.o
+  CC [M]  drivers/net/wireless/bcmdhd/dhd_cdc.o
+  CC      drivers/net/usb/usbnet.o
+  CC      drivers/tty/tty_mutex.o
+  CC      drivers/mmc/core/sdio_cis.o
+  CC      drivers/video/samsung/s3cfb_fimd6x.o
+  CC      drivers/staging/zram/zram_sysfs.o
+  CC      drivers/mmc/core/sdio_io.o
+  CC      drivers/scsi/scsi_devinfo.o
+  CC [M]  drivers/net/wireless/bcmdhd/dhd_common.o
+  CC      drivers/staging/zram/xvmalloc.o
+  CC      drivers/tty/pty.o
+  CC      drivers/mmc/core/sdio_irq.o
+  CC      drivers/scsi/scsi_sysctl.o
+  CC      drivers/mmc/core/quirks.o
+  CC      drivers/video/samsung/s3cfb_mdnie.o
+  CC      drivers/staging/zcache/tmem.o
+  CC      drivers/mmc/core/debugfs.o
+  LD      drivers/staging/zram/zram.o
+  LD      drivers/staging/zram/built-in.o
+  CC      drivers/tty/tty_audit.o
+  CC      drivers/tty/sysrq.o
+  CC      drivers/scsi/scsi_proc.o
+  CC      drivers/net/usb/cdc_ncm.o
+  CC      drivers/net/usb/rmnet_usb_ctrl.o
+  CC      drivers/video/samsung/s3cfb_ielcd.o
+  CC      drivers/usb/core/driver.o
+  LD      drivers/tty/ipwireless/built-in.o
+  LD      drivers/mmc/core/mmc_core.o
+  CC      drivers/tty/serial/serial_core.o
+/home/nian/CherryS/drivers/net/usb/rmnet_usb_ctrl.c:427:12: warning: 'usb_anchor_len' defined but not used [-Wunused-function]
+  LD      drivers/mmc/core/built-in.o
+  LD      drivers/staging/zcache/zcache.o
+  LD      drivers/staging/zcache/built-in.o
+  CC      drivers/mmc/host/mshci.o
+  LD      drivers/staging/built-in.o
+  CC      drivers/video/samsung/mdnie.o
+  CC      drivers/scsi/scsi_trace.o
+  CC [M]  drivers/net/wireless/bcmdhd/dhd_custom_gpio.o
+  CC      drivers/mmc/host/mshci-s3c.o
+  CC      drivers/tty/vt/vt_ioctl.o
+  CC      drivers/net/usb/rmnet_usb_data.o
+  CC [M]  drivers/net/wireless/bcmdhd/dhd_custom_sec.o
+  CC      drivers/tty/vt/vc_screen.o
+  CC      drivers/usb/core/config.o
+/home/nian/CherryS/drivers/video/samsung/mdnie.c: In function 'set_mdnie_value':
+/home/nian/CherryS/drivers/video/samsung/mdnie.c:198:6: warning: comparison between 'enum SCENARIO' and 'enum SCENARIO_COLOR_TONE' [-Wenum-compare]
+/home/nian/CherryS/drivers/video/samsung/mdnie.c:198:6: warning: comparison between 'enum SCENARIO' and 'enum SCENARIO_COLOR_TONE' [-Wenum-compare]
+/home/nian/CherryS/drivers/mmc/host/mshci-s3c.c:603:13: warning: 'mshci_s3c_shutdown' defined but not used [-Wunused-function]
+  CC      drivers/tty/serial/8250.o
+  CC      drivers/video/samsung/mdnie_tunning.o
+  CC      drivers/scsi/scsi_pm.o
+  CC [M]  drivers/net/wireless/bcmdhd/dhd_linux.o
+  CC      drivers/tty/vt/selection.o
+  CC      drivers/mmc/host/sdhci.o
+  LD      drivers/usb/gadget/g_android.o
+  LD      drivers/net/usb/rmnet_usb.o
+  LD      drivers/usb/gadget/built-in.o
+  LD      drivers/net/usb/built-in.o
+  CC      drivers/video/samsung/s3cfb_s6e8aa0.o
+  CC [M]  drivers/net/wireless/bcmdhd/dhd_linux_sched.o
+  CC [M]  drivers/net/wireless/bcmdhd/dhd_cfg80211.o
+  CC      drivers/scsi/sd.o
+  CC      drivers/usb/core/file.o
+  CC      drivers/usb/host/ehci-hcd.o
+/home/nian/CherryS/drivers/video/samsung/s3cfb_s6e8aa0.c: In function 's6e8ax0_check_fb':
+/home/nian/CherryS/drivers/video/samsung/s3cfb_s6e8aa0.c:1074:19: warning: unused variable 'lcd' [-Wunused-variable]
+/home/nian/CherryS/drivers/video/samsung/s3cfb_s6e8aa0.c:1073:23: warning: unused variable 'win' [-Wunused-variable]
+  CC      drivers/tty/vt/keyboard.o
+  CC      drivers/mmc/host/sdhci-s3c.o
+  CC      drivers/tty/vt/consolemap.o
+In file included from /home/nian/CherryS/drivers/usb/host/ehci-hcd.c:1351:0:
+/home/nian/CherryS/drivers/usb/host/ehci-s5p.c: In function 's5p_wait_for_cp_resume':
+/home/nian/CherryS/drivers/usb/host/ehci-s5p.c:136:28: warning: unused variable 'pdata' [-Wunused-variable]
+  CC [M]  drivers/net/wireless/bcmdhd/dhd_sdio.o
+/home/nian/CherryS/drivers/mmc/host/sdhci-s3c.c:352:12: warning: 'sdhci_s3c_get_card_exist' defined but not used [-Wunused-function]
+  CC      drivers/usb/core/buffer.o
+  CC      drivers/video/samsung/smart_dimming.o
+  CC [M]  drivers/net/wireless/bcmdhd/aiutils.o
+  CC      drivers/video/samsung/s5p_dsim_lowlevel.o
+  LD      drivers/mmc/host/built-in.o
+  CC      drivers/usb/core/sysfs.o
+  LD      drivers/mmc/built-in.o
+  CC      drivers/tty/serial/samsung.o
+  CC      drivers/video/samsung/s5p-dsim.o
+  CONMK   drivers/tty/vt/consolemap_deftbl.c
+  CC      drivers/tty/vt/vt.o
+  SHIPPED drivers/tty/vt/defkeymap.c
+  CC      drivers/tty/vt/consolemap_deftbl.o
+  CC      drivers/tty/vt/defkeymap.o
+  CC      drivers/usb/host/ohci-hcd.o
+  LD      drivers/video/samsung/s3cfb.o
+  LD      drivers/scsi/arm/built-in.o
+In file included from /home/nian/CherryS/drivers/usb/host/ohci-hcd.c:101:0:
+/home/nian/CherryS/drivers/usb/host/ohci-dbg.c: In function 'fill_registers_buffer':
+/home/nian/CherryS/drivers/usb/host/ohci-dbg.c:642:2: warning: the comparison will always evaluate as 'true' for the address of 'next' will never be NULL [-Waddress]
+/home/nian/CherryS/drivers/usb/host/ohci-dbg.c:661:3: warning: the comparison will always evaluate as 'true' for the address of 'next' will never be NULL [-Waddress]
+  CC      drivers/usb/core/endpoint.o
+  CC [M]  drivers/net/wireless/bcmdhd/bcmevent.o
+  CC      drivers/usb/core/devio.o
+  CC      drivers/scsi/sg.o
+  LD      drivers/video/samsung/built-in.o
+  LD      drivers/video/built-in.o
+  CC [M]  drivers/net/wireless/bcmdhd/bcmutils.o
+  CC      drivers/tty/serial/s5pv210.o
+  CC [M]  drivers/net/wireless/bcmdhd/bcmwifi_channels.o
+  CC [M]  drivers/net/wireless/bcmdhd/hndpmu.o
+  CC [M]  drivers/scsi/scsi_wait_scan.o
+  CC      drivers/usb/core/notify.o
+  LD      drivers/tty/serial/built-in.o
+  CC      drivers/usb/core/generic.o
+  CC      drivers/usb/core/quirks.o
+  CC      drivers/usb/core/devices.o
+  CC      drivers/usb/core/inode.o
+  CC [M]  drivers/net/wireless/bcmdhd/linux_osl.o
+  LD      drivers/net/wireless/btlock/built-in.o
+  CC [M]  drivers/net/wireless/bcmdhd/sbutils.o
+  LD      drivers/tty/vt/built-in.o
+  CC [M]  drivers/net/wireless/bcmdhd/siutils.o
+  CC [M]  drivers/net/wireless/btlock/btlock.o
+  CC      drivers/usb/misc/diag_bridge.o
+  LD      drivers/scsi/scsi_mod.o
+  LD      drivers/scsi/sd_mod.o
+  LD      drivers/usb/host/built-in.o
+  CC      drivers/usb/mon/mon_main.o
+  LD      drivers/tty/built-in.o
+  CC      drivers/usb/notify/host_notify_class.o
+  CC      drivers/usb/notify/host_notifier.o
+  CC      drivers/usb/serial/usb-serial.o
+/home/nian/CherryS/drivers/usb/misc/diag_bridge.c: In function 'read_hsic_cb':
+/home/nian/CherryS/drivers/usb/misc/diag_bridge.c:123:26: warning: unused variable 'cbs' [-Wunused-variable]
+  LD      drivers/usb/core/usbcore.o
+  CC [M]  drivers/net/wireless/bcmdhd/wl_android.o
+  CC [M]  drivers/net/wireless/bcmdhd/wl_cfg80211.o
+  LD      drivers/usb/notify/built-in.o
+  CC [M]  drivers/net/wireless/bcmdhd/wl_cfgp2p.o
+  CC      drivers/usb/serial/generic.o
+  CC      drivers/usb/mon/mon_stat.o
+  CC      drivers/usb/misc/mdm_ctrl_bridge.o
+  CC      drivers/usb/storage/scsiglue.o
+  CC      drivers/usb/storage/protocol.o
+  LD      drivers/usb/core/built-in.o
+  CC      drivers/usb/mon/mon_text.o
+  CC      drivers/usb/storage/transport.o
+  LD      drivers/scsi/built-in.o
+  CC      drivers/usb/storage/usb.o
+/home/nian/CherryS/drivers/net/wireless/bcmdhd/wl_cfg80211.c:276:7: warning: multi-line comment [-Wcomment]
+/home/nian/CherryS/drivers/net/wireless/bcmdhd/wl_cfg80211.c:6112:7: warning: multi-line comment [-Wcomment]
+  CC [M]  drivers/net/wireless/bcmdhd/wldev_common.o
+/home/nian/CherryS/drivers/net/wireless/bcmdhd/wl_cfg80211.c:6637:7: warning: multi-line comment [-Wcomment]
+/home/nian/CherryS/drivers/net/wireless/bcmdhd/wl_cfg80211.c: In function 'wl_setup_wiphy':
+/home/nian/CherryS/drivers/net/wireless/bcmdhd/wl_cfg80211.c:6728:7: warning: multi-line comment [-Wcomment]
+/home/nian/CherryS/drivers/net/wireless/bcmdhd/wl_cfg80211.c: At top level:
+/home/nian/CherryS/drivers/net/wireless/bcmdhd/wl_cfg80211.c:11076:7: warning: multi-line comment [-Wcomment]
+  CC      drivers/usb/storage/initializers.o
+  CC      drivers/usb/serial/bus.o
+  CC      drivers/usb/serial/pl2303.o
+  CC      drivers/usb/storage/sierra_ms.o
+  CC      drivers/usb/misc/mdm_data_bridge.o
+  CC      drivers/usb/mon/mon_bin.o
+  CC [M]  drivers/net/wireless/bcmdhd/wl_linux_mon.o
+  CC      drivers/usb/serial/qcserial.o
+  CC      drivers/usb/storage/option_ms.o
+  CC      drivers/usb/storage/usual-tables.o
+  CC      drivers/usb/serial/usb_wwan.o
+  CC      drivers/usb/serial/csvt.o
+  CC [M]  drivers/net/wireless/bcmdhd/wl_roam.o
+  LD      drivers/usb/serial/usbserial.o
+  LD      drivers/usb/storage/usb-storage.o
+  LD      drivers/usb/storage/built-in.o
+  LD      drivers/usb/misc/mdm_bridge.o
+  LD      drivers/usb/misc/built-in.o
+  LD      drivers/usb/mon/usbmon.o
+  LD      drivers/usb/mon/built-in.o
+  LD      drivers/usb/serial/built-in.o
+  LD      drivers/usb/built-in.o
+  LD [M]  drivers/net/wireless/bcmdhd/dhd.o
+  LD      drivers/net/wireless/built-in.o
+  LD      drivers/net/built-in.o
+  LD      drivers/built-in.o
+  LD      vmlinux.o
+  MODPOST vmlinux.o
+  GEN     .version
+  CHK     include/generated/compile.h
+  LD      .tmp_vmlinux1
+  KSYM    .tmp_kallsyms1.S
+  AS      .tmp_kallsyms1.o
+  LD      .tmp_vmlinux2
+  KSYM    .tmp_kallsyms2.S
+  AS      .tmp_kallsyms2.o
+  LD      vmlinux
+  SYSMAP  System.map
+  SYSMAP  .tmp_System.map
+  OBJCOPY arch/arm/boot/Image
+  Building modules, stage 2.
+  Kernel: arch/arm/boot/Image is ready
+  MODPOST 10 modules
+  AS      arch/arm/boot/compressed/head.o
+  GZIP    arch/arm/boot/compressed/piggy.gzip
+  CC      arch/arm/boot/compressed/misc.o
+  CC      arch/arm/boot/compressed/decompress.o
+  SHIPPED arch/arm/boot/compressed/lib1funcs.S
+  AS      arch/arm/boot/compressed/lib1funcs.o
+  AS      arch/arm/boot/compressed/piggy.gzip.o
+  CC      arch/arm/mvp/commkm/commkm.mod.o
+  CC      arch/arm/mvp/mvpkm/mvpkm.mod.o
+  CC      arch/arm/mvp/pvtcpkm/pvtcpkm.mod.o
+  CC      crypto/md4.mod.o
+  CC      drivers/net/wireless/bcmdhd/dhd.mod.o
+  CC      drivers/net/wireless/btlock/btlock.mod.o
+  CC      drivers/scsi/scsi_wait_scan.mod.o
+  CC      fs/cifs/cifs.mod.o
+  CC      fs/exfat/exfat_core.mod.o
+  CC      fs/exfat/exfat_fs.mod.o
+  LD      arch/arm/boot/compressed/vmlinux
+  OBJCOPY arch/arm/boot/zImage
+  Kernel: arch/arm/boot/zImage is ready
+  LD [M]  arch/arm/mvp/pvtcpkm/pvtcpkm.ko
+  LD [M]  arch/arm/mvp/mvpkm/mvpkm.ko
+  LD [M]  drivers/net/wireless/btlock/btlock.ko
+  LD [M]  fs/exfat/exfat_core.ko
+  LD [M]  crypto/md4.ko
+  LD [M]  drivers/net/wireless/bcmdhd/dhd.ko
+  LD [M]  arch/arm/mvp/commkm/commkm.ko
+  LD [M]  drivers/scsi/scsi_wait_scan.ko
+  LD [M]  fs/cifs/cifs.ko
+  LD [M]  fs/exfat/exfat_fs.ko
