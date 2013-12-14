@@ -64,6 +64,14 @@ config CGROUP_BFQIO
     	  Enable hierarchical scheduling in BFQ, using the cgroups
     	  filesystem interface.  The name of the subsystem will be
     	  bfqio.
+
+config IOSCHED_VR
+	tristate "V(R) I/O scheduler"
+	default n
+	---help---
+	  Requests are chosen according to SSTF with a penalty of rev_penalty
+	  for switching head direction.
+
 config IOSCHED_ROW
 	tristate "ROW I/O scheduler"
 	default y
@@ -104,6 +112,9 @@ choice
     config DEFAULT_SIO
         bool "SIO" if IOSCHED_SIO=y
 
+	config DEFAULT_VR
+		bool "V(R)" if IOSCHED_VR=y
+
 	config DEFAULT_BFQ
     		bool "BFQ" if IOSCHED_BFQ=y
 		
@@ -119,6 +130,7 @@ config DEFAULT_IOSCHED
     default "row" if DEFAULT_ROW
 	default "bfq" if DEFAULT_BFQ
     default "sio" if DEFAULT_SIO
+	default "vr" if DEFAULT_VR
 	default "noop" if DEFAULT_NOOP
 
 endmenu
