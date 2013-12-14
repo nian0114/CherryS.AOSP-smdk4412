@@ -1,1 +1,0 @@
-cmd_arch/arm/mvp/built-in.o :=  /opt/toolchains/arm-eabi-4.6/bin/arm-eabi-ld -EL    -r -o arch/arm/mvp/built-in.o arch/arm/mvp/mvpkm/built-in.o arch/arm/mvp/commkm/built-in.o arch/arm/mvp/pvtcpkm/built-in.o 

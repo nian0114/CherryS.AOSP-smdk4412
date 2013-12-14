@@ -1,6 +1,0 @@
-kernel/drivers/staging/android/logger.ko
-kernel/drivers/staging/android/timed_gpio.ko
-kernel/drivers/staging/lz4/lz4_compress.ko
-kernel/drivers/staging/lz4/lz4_decompress.ko
-kernel/drivers/staging/zcache/zcache.ko
-kernel/drivers/staging/zram/zram.ko
