@@ -1,0 +1,12 @@
+#!/system/bin/sh
+#GPU Frequencies
+#Change GPU clock speeds:
+#266/350
+
+#echo "266 266 266 350 350" > /sys/class/misc/gpu_clock_control/gpu_control
+
+echo "266" > /sys/module/mali/parameters/step0_clk
+echo "266" > /sys/module/mali/parameters/step1_clk
+echo "266" > /sys/module/mali/parameters/step2_clk
+echo "350" > /sys/module/mali/parameters/step3_clk
+echo "350" > /sys/module/mali/parameters/step4_clk
