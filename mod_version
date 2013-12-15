@@ -10,7 +10,7 @@ if [ ! "$RELEASE_BUILD" = 'y' ]; then
     export KBUILD_BUILD_VERSION="$BUILD_NUMBER"
   fi
 fi
-export BUILD_LOCALVERSION="CherryS.AOSP-V0.2-Nian"
+export BUILD_LOCALVERSION="CherryS.AOSP-V0.3-Nian"
 
 # kernel vesion
 KERNEL_VERSION=`grep '^VERSION = ' ./Makefile | cut -d' ' -f3`
