@@ -1,0 +1,16 @@
+  GEN     /home/nian/CherryS-AOSP/out/SC03E/AOSP/obj/Makefile
+scripts/kconfig/conf --silentoldconfig Kconfig
+arch/arm/mach-exynos/Kconfig:884:warning: choice value used outside its choice group
+arch/arm/mach-exynos/Kconfig:886:warning: defaults for choice values not supported
+  GEN     /home/nian/CherryS-AOSP/out/SC03E/AOSP/obj/Makefile
+  CHK     include/linux/version.h
+  UPD     include/linux/version.h
+  Using /home/nian/CherryS-AOSP as source for kernel
+  /home/nian/CherryS-AOSP is not clean, please run 'make mrproper'
+  in the '/home/nian/CherryS-AOSP' directory.
+/home/nian/CherryS-AOSP/Makefile:982: recipe for target 'prepare3' failed
+make[1]: *** [prepare3] Error 1
+make[1]: *** 正在等待未完成的任务....
+make[1]: *** wait: 没有子进程。 停止。
+Makefile:130: recipe for target 'sub-make' failed
+make: *** [sub-make] Error 2
