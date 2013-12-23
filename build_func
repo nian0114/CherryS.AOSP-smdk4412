@@ -49,7 +49,10 @@ make_cwm_image()
         rm -rf tmp
     fi
     mkdir -p ./tmp/META-INF/com/google/android
+    mkdir -p ./tmp/system/etc/init.d
+    mkdir -p ./tmp/system/lib/modules
     cp $IMAGE_NAME.img ./tmp/
+    cp $KERNEL_DIR/release-tools/etc/init.d/* ./tmp/system/etc/init.d
     cp $KERNEL_DIR/release-tools/update-binary ./tmp/META-INF/com/google/android/
     sed -e "s/@VERSION/$BUILD_LOCALVERSION/g" $KERNEL_DIR/release-tools/$TARGET_DEVICE/updater-script-$IMAGE_NAME.sed > ./tmp/META-INF/com/google/android/updater-script
     cd tmp && zip -rq ../cwm.zip ./* && cd ../

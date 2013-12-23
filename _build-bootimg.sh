@@ -84,17 +84,14 @@ if [ "$COMPILE_ERROR" ]; then
 fi
 
 # *.ko install
-echo ""
-echo "=====> INSTALL KERNEL MODULES"
-if [ "$USE_INITRAMFS" = 'y' ]; then
-  find -name '*.ko' -exec cp -av {} $BOOT_RAMDISK_TMP_DIR/lib/modules/ \;
-  STRIP=strip
-  $CROSS_COMPILE$STRIP --strip-unneeded $BOOT_RAMDISK_TMP_DIR/lib/modules/*
-else
-  find -name '*.ko' -exec cp -av {} $RAMDISK_TMP_DIR/lib/modules/ \;
-  STRIP=strip
-  $CROSS_COMPILE$STRIP --strip-unneeded $RAMDISK_TMP_DIR/lib/modules/*
-fi
+mkdir -p release-tools/lib/modules
+cp -arf out/SC03E/$BUILD_TARGET/obj/drivers/scsi/scsi_wait_scan.ko release-tools/lib/modules/
+cp -arf out/SC03E/$BUILD_TARGET/obj/drivers/net/wireless/bcmdhd/dhd.ko release-tools/lib/modules/
+cp -arf out/SC03E/$BUILD_TARGET/obj/drivers/net/wireless/btlock/btlock.ko release-tools/lib/modules/
+cp -arf out/SC03E/$BUILD_TARGET/obj/arch/arm/mvp/pvtcpkm/pvtcpkm.ko release-tools/lib/modules/
+cp -arf out/SC03E/$BUILD_TARGET/obj/arch/arm/mvp/commkm/commkm.ko release-tools/lib/modules/
+cp -arf out/SC03E/$BUILD_TARGET/obj/arch/arm/mvp/mvpkm/mvpkm.ko release-tools/lib/modules/
+${CROSS_COMPILE}strip --strip-unneeded release-tools/lib/modules/*
 
 if [ "$USE_INITRAMFS" = 'y' ]; then
   echo ""

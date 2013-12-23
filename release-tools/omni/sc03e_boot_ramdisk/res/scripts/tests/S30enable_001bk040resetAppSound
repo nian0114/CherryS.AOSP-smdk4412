@@ -1,0 +1,45 @@
+#!/system/bin/sh
+#App: Reset Sound settings
+#Resets Sound settings done via the Boeffla Tweaks app
+
+TITLE="App: Reset Sound settings"
+STYLE="Ok"
+
+if [ -f /sdcard/boeffla_twk_dlg_helper ]; then
+  rm /sdcard/boeffla_twk_dlg_helper
+fi;
+
+am start -a android.intent.action.MAIN -e message "Do you really want to reset settings?" -e title "$TITLE" -e button1 "Yes" -e button2 "No" -e toasty "Resetting Sound settings now!" -e toastn "Reset of Sound settings aborted!" -n bo.boeffla.tweaks.dialog.helper/.BoefflaTweaksDialogActivity
+
+while [ ! -f /sdcard/boeffla_twk_dlg_helper ]
+do
+  /sbin/busybox sleep 1
+done
+
+RESULT=`cat /sdcard/boeffla_twk_dlg_helper`
+
+if [ "$RESULT" = "yes" ]; then
+
+  if [ -f /sdcard/boeffla_twk_dlg_helper ]; then
+    rm /sdcard/boeffla_twk_dlg_helper
+  fi;
+
+  SYSTEM_DEVICE="/dev/block/mmcblk0p13"
+
+  /sbin/busybox mount -o remount,rw -t ext4 $SYSTEM_DEVICE /system
+  /sbin/busybox rm /system/etc/init.d/*_bkbs*
+  /sbin/busybox rm /system/etc/init.d/*_001bkbs*
+  /sbin/busybox mount -o remount,ro -t ext4 $SYSTEM_DEVICE /system
+
+  echo "0" > /sys/class/misc/boeffla_sound/boeffla_sound
+
+am start -a android.intent.action.MAIN -e message "Reset of Sound settings done!" -e title "$TITLE" -e okstyle "$STYLE" -n bo.boeffla.tweaks.dialog.helper/.BoefflaTweaksDialogActivity
+
+else
+
+  if [ -f /sdcard/boeffla_twk_dlg_helper ]; then
+    rm /sdcard/boeffla_twk_dlg_helper
+  fi;
+  exit 0
+
+fi;
