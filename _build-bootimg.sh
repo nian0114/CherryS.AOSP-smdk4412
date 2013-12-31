@@ -84,14 +84,25 @@ if [ "$COMPILE_ERROR" ]; then
 fi
 
 # *.ko install
-mkdir -p release-tools/lib/modules
-cp -arf out/SC03E/$BUILD_TARGET/obj/drivers/scsi/scsi_wait_scan.ko release-tools/lib/modules/
-cp -arf out/SC03E/$BUILD_TARGET/obj/drivers/net/wireless/bcmdhd/dhd.ko release-tools/lib/modules/
-cp -arf out/SC03E/$BUILD_TARGET/obj/drivers/net/wireless/btlock/btlock.ko release-tools/lib/modules/
-cp -arf out/SC03E/$BUILD_TARGET/obj/arch/arm/mvp/pvtcpkm/pvtcpkm.ko release-tools/lib/modules/
-cp -arf out/SC03E/$BUILD_TARGET/obj/arch/arm/mvp/commkm/commkm.ko release-tools/lib/modules/
-cp -arf out/SC03E/$BUILD_TARGET/obj/arch/arm/mvp/mvpkm/mvpkm.ko release-tools/lib/modules/
-${CROSS_COMPILE}strip --strip-unneeded release-tools/lib/modules/*
+if [ "$BUILD_TARGET" = 'OMNI' ]; then
+  mkdir -p release-tools/omni/lib/modules
+  cp -arf out/SC03E/$BUILD_TARGET/obj/drivers/scsi/scsi_wait_scan.ko release-tools/omni/lib/modules/
+  cp -arf out/SC03E/$BUILD_TARGET/obj/drivers/net/wireless/bcmdhd/dhd.ko release-tools/omni/lib/modules/
+  cp -arf out/SC03E/$BUILD_TARGET/obj/drivers/net/wireless/btlock/btlock.ko release-tools/omni/lib/modules/
+  cp -arf out/SC03E/$BUILD_TARGET/obj/arch/arm/mvp/pvtcpkm/pvtcpkm.ko release-tools/omni/lib/modules/
+  cp -arf out/SC03E/$BUILD_TARGET/obj/arch/arm/mvp/commkm/commkm.ko release-tools/omni/lib/modules/
+  cp -arf out/SC03E/$BUILD_TARGET/obj/arch/arm/mvp/mvpkm/mvpkm.ko release-tools/omni/lib/modules/
+  ${CROSS_COMPILE}strip --strip-unneeded release-tools/omni/lib/modules/*
+else
+  mkdir -p release-tools/common/lib/modules
+  cp -arf out/SC03E/$BUILD_TARGET/obj/drivers/scsi/scsi_wait_scan.ko release-tools/common/lib/modules/
+  cp -arf out/SC03E/$BUILD_TARGET/obj/drivers/net/wireless/bcmdhd/dhd.ko release-tools/common/lib/modules/
+  cp -arf out/SC03E/$BUILD_TARGET/obj/drivers/net/wireless/btlock/btlock.ko release-tools/common/lib/modules/
+  cp -arf out/SC03E/$BUILD_TARGET/obj/arch/arm/mvp/pvtcpkm/pvtcpkm.ko release-tools/common/lib/modules/
+  cp -arf out/SC03E/$BUILD_TARGET/obj/arch/arm/mvp/commkm/commkm.ko release-tools/common/lib/modules/
+  cp -arf out/SC03E/$BUILD_TARGET/obj/arch/arm/mvp/mvpkm/mvpkm.ko release-tools/common/lib/modules/
+  ${CROSS_COMPILE}strip --strip-unneeded release-tools/common/lib/modules/*
+fi
 
 if [ "$USE_INITRAMFS" = 'y' ]; then
   echo ""
