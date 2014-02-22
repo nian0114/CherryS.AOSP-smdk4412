@@ -14,7 +14,7 @@
  *
  */
 
-#define DEBUG
+//#define DEBUG
 /* #define VERBOSE_DEBUG */
 /*#define SEC_TSP_DEBUG*/
 /* #define SEC_TSP_VERBOSE_DEBUG */
@@ -50,15 +50,13 @@
 
 #include <asm/unaligned.h>
 
-#ifdef CONFIG_AGNI_OMNI_MODE
-#include "../keyboard/cypress/cypress-touchkey.h"
-#endif
-
 #include "touchboost_switch.h"
 
 #ifdef CONFIG_TOUCH_WAKE
 #include <linux/touch_wake.h>
 #endif
+
+#include "../keyboard/cypress/cypress-touchkey.h"
 
 #define MAX_FINGERS		10
 #define MAX_WIDTH		30
@@ -153,7 +151,7 @@ int touch_is_pressed = 0;
 #define ISC_DL_MODE	1
 
 /* 4.8" OCTA LCD */
-#define FW_VERSION_4_8 0xBD
+#define FW_VERSION_4_8 0xBB
 
 #define MAX_FW_PATH 255
 #define TSP_FW_FILENAME "melfas_fw.bin"
@@ -534,7 +532,6 @@ static void mms_set_noise_mode(struct mms_ts_info *info)
 	} else {
 		dev_notice(&client->dev, "noise_mode & TA disconnect!!!\n");
 		i2c_smbus_write_byte_data(info->client, 0x30, 0x2);
-		info->noise_mode = 0;
 	}
 }
 
@@ -698,10 +695,9 @@ static irqreturn_t mms_ts_interrupt(int irq, void *dev_id)
 				, angle, palm);
 #else
 			if (info->finger_state[id] != 0) {
-#ifdef CONFIG_AGNI_OMNI_MODE
                 // report state to cypress-touchkey for backlight timeout
                 touchscreen_state_report(0);
-#endif
+
 				dev_notice(&client->dev,
 					"finger [%d] up, palm %d\n", id, palm);
 			}
@@ -741,10 +737,8 @@ static irqreturn_t mms_ts_interrupt(int irq, void *dev_id)
 		if (info->finger_state[id] == 0) {
 			info->finger_state[id] = 1;
 
-#ifdef CONFIG_AGNI_OMNI_MODE
             // report state to cypress-touchkey for backlight timeout
             touchscreen_state_report(1);
-#endif
 
 			dev_notice(&client->dev,
 				"finger [%d] down, palm %d\n", id, palm);
@@ -834,7 +828,7 @@ static int mms100_check_operating_mode(struct i2c_client *_client,
 	ret = mms100_i2c_read(_client, ISC_ADDR_VERSION, 1, &rd_buf);
 
 	if (ret<0) {
-		pr_info("[TSP ISC] %s,%d: i2c read fail[%d]\n",
+		pr_debug("[TSP ISC] %s,%d: i2c read fail[%d]\n",
 			__func__, __LINE__, ret);
 		return _error_code;
 	}
@@ -851,7 +845,7 @@ static int mms100_get_version_info(struct i2c_client *_client)
 	ret = mms100_i2c_read(_client, ISC_ADDR_VERSION, 4, rd_buf);
 
 	if (ret < 0) {
-		pr_info("[TSP ISC] %s,%d: i2c read fail[%d]\n",
+		pr_debug("[TSP ISC] %s,%d: i2c read fail[%d]\n",
 			__func__, __LINE__, ret);
 		return ISC_I2C_ERROR;
 	}
@@ -868,7 +862,7 @@ static int mms100_get_version_info(struct i2c_client *_client)
 	ret = mms100_i2c_read(_client, ISC_ADDR_SECTION_PAGE_INFO, 8, rd_buf);
 
 	if (ret < 0) {
-		pr_info("[TSP ISC] %s,%d: i2c read fail[%d]\n",
+		pr_debug("[TSP ISC] %s,%d: i2c read fail[%d]\n",
 			__func__, __LINE__, ret);
 		return ISC_I2C_ERROR;
 	}
@@ -879,13 +873,13 @@ static int mms100_get_version_info(struct i2c_client *_client)
 	}
 
 	for (i = 0; i < SECTION_NUM; i++) {
-		pr_info("TS : Section(%d) version: 0x%02X\n",
+		pr_debug("TS : Section(%d) version: 0x%02X\n",
 			i, ts_info[i].version);
-		pr_info("TS : Section(%d) Start Address: 0x%02X\n",
+		pr_debug("TS : Section(%d) Start Address: 0x%02X\n",
 			i, ts_info[i].start_addr);
-		pr_info("TS : Section(%d) End Address: 0x%02X\n",
+		pr_debug("TS : Section(%d) End Address: 0x%02X\n",
 			i, ts_info[i].end_addr);
-		pr_info("TS : Section(%d) Compatibility: 0x%02X\n",
+		pr_debug("TS : Section(%d) Compatibility: 0x%02X\n",
 			i, ts_info[i].compatible_version);
 	}
 
@@ -906,7 +900,7 @@ static int mms100_seek_section_info(void)
 	for (i = 0; i < SECTION_NUM; i++) {
 		if (fw_mbin[i] == NULL) {
 			buf = NULL;
-			pr_info("[TSP ISC] fw_mbin[%d]->data is NULL", i);
+			pr_debug("[TSP ISC] fw_mbin[%d]->data is NULL", i);
 		} else {
 			buf = fw_mbin[i]->data;
 		}
@@ -975,13 +969,13 @@ static int mms100_seek_section_info(void)
 	}
 
 	for (i = 0; i < SECTION_NUM; i++) {
-		pr_info("[TSP ISC] MBin : Section(%d) Version: 0x%02X\n",
+		pr_debug("[TSP ISC] MBin : Section(%d) Version: 0x%02X\n",
 			i, mbin_info[i].version);
-		pr_info("[TSP ISC] MBin : Section(%d) Start Address: 0x%02X\n",
+		pr_debug("[TSP ISC] MBin : Section(%d) Start Address: 0x%02X\n",
 			i, mbin_info[i].start_addr);
-		pr_info("[TSP ISC] MBin : Section(%d) End Address: 0x%02X\n",
+		pr_debug("[TSP ISC] MBin : Section(%d) End Address: 0x%02X\n",
 			i, mbin_info[i].end_addr);
-		pr_info("[TSP ISC] MBin : Section(%d) Compatibility: 0x%02X\n",
+		pr_debug("[TSP ISC] MBin : Section(%d) Compatibility: 0x%02X\n",
 			i, mbin_info[i].compatible_version);
 	}
 
@@ -1003,11 +997,11 @@ static eISCRet_t mms100_compare_version_info(struct i2c_client *_client)
 		if ((mbin_info[i].version == 0) ||
 			(mbin_info[i].version != ts_info[i].version)) {
 			section_update_flag[i] = true;
-			pr_info("[TSP ISC] [%d] section will be updated!", i);
+			pr_debug("[TSP ISC] [%d] section will be updated!", i);
 		}
 	}
 	section_update_flag[0] = false;
-	pr_info("[TSP ISC] [%d] [%d] [%d]", section_update_flag[1],
+	pr_debug("[TSP ISC] [%d] [%d] [%d]", section_update_flag[1],
 		section_update_flag[2], section_update_flag[3]);
 
 	if (section_update_flag[SEC_BOOTLOADER]) {
@@ -1030,7 +1024,7 @@ static eISCRet_t mms100_compare_version_info(struct i2c_client *_client)
 
 	for (i = SEC_CORE; i < SEC_PUBLIC_CONFIG; i++) {
 		if (section_update_flag[i]) {
-			pr_info("[TSP ISC] section_update_flag(%d), 0x%02x, 0x%02x\n",
+			pr_debug("[TSP ISC] section_update_flag(%d), 0x%02x, 0x%02x\n",
 				i, expected_compatibility[i],
 				mbin_info[i].compatible_version);
 
@@ -1038,7 +1032,7 @@ static eISCRet_t mms100_compare_version_info(struct i2c_client *_client)
 				mbin_info[i].compatible_version)
 				return ISC_COMPATIVILITY_ERROR;
 		} else {
-			pr_info("[TSP ISC] !section_update_flag(%d), 0x%02x, 0x%02x\n",
+			pr_debug("[TSP ISC] !section_update_flag(%d), 0x%02x, 0x%02x\n",
 				i, expected_compatibility[i],
 				ts_info[i].compatible_version);
 			if (expected_compatibility[i] !=
@@ -1054,7 +1048,7 @@ static int mms100_enter_ISC_mode(struct i2c_client *_client)
 	int ret;
 	unsigned char wr_buf[2];
 
-	pr_info("[TSP ISC] %s\n", __func__);
+	pr_debug("[TSP ISC] %s\n", __func__);
 
 	wr_buf[0] = ISC_CMD_ENTER_ISC;
 	wr_buf[1] = ISC_CMD_ENTER_ISC_PARA1;
@@ -1062,7 +1056,7 @@ static int mms100_enter_ISC_mode(struct i2c_client *_client)
 	ret = i2c_master_send(_client, wr_buf, 2);
 
 	if (ret < 0) {
-		pr_info("[TSP ISC] %s,%d: i2c write fail[%d]\n",
+		pr_debug("[TSP ISC] %s,%d: i2c write fail[%d]\n",
 			__func__, __LINE__, ret);
 		return ISC_I2C_ERROR;
 	}
@@ -1084,14 +1078,14 @@ static int mms100_enter_config_update(struct i2c_client *_client)
 	ret = i2c_master_send(_client, wr_buf, 10);
 
 	if (ret < 0) {
-		pr_info("[TSP ISC] %s,%d: i2c write fail[%d]\n",
+		pr_debug("[TSP ISC] %s,%d: i2c write fail[%d]\n",
 			__func__, __LINE__, ret);
 		return ISC_I2C_ERROR;
 	}
 
 	ret = mms100_i2c_read(_client, ISC_CMD_CONFIRM_STATUS, 1, &rd_buf);
 	if (ret < 0) {
-		pr_info("[TSP ISC] %s,%d: i2c read fail[%d]\n",
+		pr_debug("[TSP ISC] %s,%d: i2c read fail[%d]\n",
 			__func__, __LINE__, ret);
 		return ISC_I2C_ERROR;
 	}
@@ -1099,7 +1093,7 @@ static int mms100_enter_config_update(struct i2c_client *_client)
 	if (rd_buf != ISC_STATUS_UPDATE_MODE)
 		return ISC_UPDATE_MODE_ENTER_ERROR;
 
-	pr_info("[TSP ISC]End mms100_enter_config_update()\n");
+	pr_debug("[TSP ISC]End mms100_enter_config_update()\n");
 
 	return ISC_SUCCESS;
 }
@@ -1122,7 +1116,7 @@ static int mms100_ISC_clear_page(struct i2c_client *_client,
 	ret = i2c_master_send(_client, g_wr_buf, PACKET_SIZE);
 
 	if (ret < 0) {
-		pr_info("[TSP ISC] %s,%d: i2c write fail[%d]\n",
+		pr_debug("[TSP ISC] %s,%d: i2c write fail[%d]\n",
 			__func__, __LINE__, ret);
 		return ISC_I2C_ERROR;
 	}
@@ -1130,7 +1124,7 @@ static int mms100_ISC_clear_page(struct i2c_client *_client,
 	ret = mms100_i2c_read(_client, ISC_CMD_CONFIRM_STATUS, 1, &rd_buf);
 
 	if (ret < 0) {
-		pr_info("[TSP ISC] %s,%d: i2c read fail[%d]\n",
+		pr_debug("[TSP ISC] %s,%d: i2c read fail[%d]\n",
 			__func__, __LINE__, ret);
 		return ISC_I2C_ERROR;
 	}
@@ -1138,7 +1132,7 @@ static int mms100_ISC_clear_page(struct i2c_client *_client,
 	if (rd_buf != ISC_STATUS_CRC_CHECK_SUCCESS)
 		return ISC_UPDATE_MODE_ENTER_ERROR;
 
-	pr_info("[TSP ISC]End mms100_ISC_clear_page()\n");
+	pr_debug("[TSP ISC]End mms100_ISC_clear_page()\n");
 	return ISC_SUCCESS;
 
 }
@@ -1199,7 +1193,7 @@ static int mms100_update_section_data(struct i2c_client *_client)
 
 	for (i = 0; i < SECTION_NUM; i++) {
 		if (section_update_flag[i]) {
-			pr_info("[TSP ISC] section data i2c flash : [%d]", i);
+			pr_debug("[TSP ISC] section data i2c flash : [%d]", i);
 
 			next_ptr = 0;
 			ptr_fw = fw_mbin[i]->data;
@@ -1224,7 +1218,7 @@ static int mms100_update_section_data(struct i2c_client *_client)
 				ret = i2c_master_send(_client,
 					ptr_fw, PACKET_SIZE);
 				if (ret < 0) {
-					pr_info("[TSP ISC] %s,%d: i2c write fail[%d]\n",
+					pr_debug("[TSP ISC] %s,%d: i2c write fail[%d]\n",
 						__func__, __LINE__, ret);
 					return ISC_I2C_ERROR;
 				}
@@ -1232,7 +1226,7 @@ static int mms100_update_section_data(struct i2c_client *_client)
 				ret = mms100_i2c_read(_client,
 					ISC_CMD_CONFIRM_STATUS, 1, &rd_buf);
 				if (ret < 0) {
-					pr_info("[TSP ISC] %s,%d: i2c read fail[%d]\n",
+					pr_debug("[TSP ISC] %s,%d: i2c read fail[%d]\n",
 						__func__, __LINE__, ret);
 					return ISC_I2C_ERROR;
 				}
@@ -1245,7 +1239,7 @@ static int mms100_update_section_data(struct i2c_client *_client)
 		}
 	}
 
-	pr_info("[TSP ISC]End mms100_update_section_data()\n");
+	pr_debug("[TSP ISC]End mms100_update_section_data()\n");
 	return ISC_SUCCESS;
 }
 
@@ -1265,7 +1259,7 @@ static eISCRet_t mms100_open_mbinary(struct i2c_client *_client)
 	if (!ret)
 		return ISC_SUCCESS;
 	else {
-		pr_info("[TSP ISC] request_firmware fail");
+		pr_debug("[TSP ISC] request_firmware fail");
 		return ret;
 	}
 }
@@ -1286,7 +1280,7 @@ eISCRet_t mms100_ISC_download_mbinary(struct mms_ts_info *info)
 	struct i2c_client *_client = info->client;
 	eISCRet_t ret_msg = ISC_NONE;
 
-	pr_info("[TSP ISC] %s\n", __func__);
+	pr_debug("[TSP ISC] %s\n", __func__);
 
 	mms100_reset(info);
 
@@ -1315,23 +1309,23 @@ eISCRet_t mms100_ISC_download_mbinary(struct mms_ts_info *info)
 	if (ret_msg != ISC_SUCCESS)
 		goto ISC_ERROR_HANDLE;
 
-	pr_info("[TSP ISC]mms100_update_section_data start");
+	pr_debug("[TSP ISC]mms100_update_section_data start");
 
 	ret_msg = mms100_update_section_data(_client);
 	if (ret_msg != ISC_SUCCESS)
 		goto ISC_ERROR_HANDLE;
 
-	pr_info("[TSP ISC]mms100_update_section_data end");
+	pr_debug("[TSP ISC]mms100_update_section_data end");
 
 /*	mms100_reset(info); */
 
-	pr_info("[TSP ISC]FIRMWARE_UPDATE_FINISHED!!!\n");
+	pr_debug("[TSP ISC]FIRMWARE_UPDATE_FINISHED!!!\n");
 
 	ret_msg = ISC_SUCCESS;
 
 ISC_ERROR_HANDLE:
 	if (ret_msg != ISC_SUCCESS)
-		pr_info("[TSP ISC]ISC_ERROR_CODE: %d\n", ret_msg);
+		pr_debug("[TSP ISC]ISC_ERROR_CODE: %d\n", ret_msg);
 
 	mms100_reset(info);
 	mms100_close_mbinary();

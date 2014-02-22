@@ -17,6 +17,9 @@ if CPU_EXYNOS4210 || CPU_EXYNOS4212 || CPU_EXYNOS4412
 	source "drivers/media/video/samsung/fimc/Kconfig"
 	source "drivers/media/video/samsung/tvout/Kconfig"
 	source "drivers/media/video/samsung/mfc5x/Kconfig"
+    source "drivers/gpu/mali400/Kconfig"
+    source "drivers/media/video/samsung/mali/Kconfig"
+    source "drivers/media/video/samsung/ump/Kconfig"
 endif
 
 config VIDEO_FIMG2D
@@ -114,3 +117,5 @@ config VIDEO_SAMSUNG_MEMSIZE_TVOUT
 	depends on VIDEO_TVOUT
 	default "16384"
 endif
+
+source "drivers/media/video/samsung/media_monitor/Kconfig"

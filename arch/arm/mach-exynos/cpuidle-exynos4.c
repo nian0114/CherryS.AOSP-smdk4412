@@ -448,11 +448,6 @@ static int exynos4_check_operation(void)
 		return 1;
 #endif
 
-#if defined(CONFIG_ISDBT)
-	if (check_isdbt_op())
-		return 1;
-#endif
-
 #if defined(CONFIG_BT)
 	if (check_bt_op())
 		return 1;
@@ -746,7 +741,7 @@ early_wakeup:
 			       ARRAY_SIZE(exynos4_lpa_save));
 
 #ifdef CONFIG_EXYNOS4_CPUFREQ
-	if ((exynos_result_of_asv > 1) && !soc_is_exynos4210()) {
+	if (!soc_is_exynos4210()) {
 		exynos4x12_set_abb_member(ABB_ARM, abb_val);
 		exynos4x12_set_abb_member(ABB_INT, abb_val_int);
 	}

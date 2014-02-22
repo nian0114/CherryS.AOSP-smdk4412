@@ -12,6 +12,10 @@ obj-$(CONFIG_VIDEO_FIMG2D3X)	+= fimg2d3x/
 obj-$(CONFIG_VIDEO_FIMG2D4X)	+= fimg2d4x/
 endif
 
+obj-$(CONFIG_VIDEO_UMP)		+= ump/
 obj-$(CONFIG_VIDEO_TSI)		+= tsi/
+obj-$(CONFIG_VIDEO_MALI400MP)	+= mali/
+
+obj-$(CONFIG_EXYNOS_MEDIA_MONITOR)  += media_monitor/
 
 EXTRA_CFLAGS += -Idrivers/media/video

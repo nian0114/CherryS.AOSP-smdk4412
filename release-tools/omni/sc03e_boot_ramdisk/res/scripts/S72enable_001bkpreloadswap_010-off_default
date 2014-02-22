@@ -1,6 +1,0 @@
-#!/system/bin/sh
-#AGNi preloadSWAP 512MB
-#Enable or disable preloadSWAP with 2nd priority:
-#Off (default)
-
-mount -o nosuid,nodev,noatime,wait -t ext4 /dev/block/mmcblk0p14 /preload || swapoff /dev/block/mmcblk0p14 && mke2fs /dev/block/mmcblk0p14 && mount -o nosuid,nodev,noatime,wait -t ext4 /dev/block/mmcblk0p14 /preload

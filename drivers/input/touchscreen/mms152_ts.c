@@ -49,9 +49,7 @@
 
 #include <asm/unaligned.h>
 
-#ifdef CONFIG_AGNI_OMNI_MODE
 #include "../keyboard/cypress/cypress-touchkey.h"
-#endif
 
 #ifdef CONFIG_INPUT_FBSUSPEND
 #ifdef CONFIG_DRM
@@ -984,10 +982,8 @@ static irqreturn_t mms_ts_interrupt(int irq, void *dev_id)
 				if (info->finger_state[id] != 0) {
 					info->finger_state[id] = 0;
 
-#ifdef CONFIG_AGNI_OMNI_MODE
 					// report state to cypress-touchkey for backlight timeout
 					touchscreen_state_report(0);
-#endif
 
 #ifdef CONFIG_LCD_FREQ_SWITCH
 					dev_notice(&client->dev,
@@ -1003,10 +999,8 @@ static irqreturn_t mms_ts_interrupt(int irq, void *dev_id)
 				if (info->finger_state[id] != 0) {
 					info->finger_state[id] = 0;
 
-#ifdef CONFIG_AGNI_OMNI_MODE
 					// report state to cypress-touchkey for backlight timeout
 					touchscreen_state_report(0);
-#endif
 
 					dev_notice(&client->dev,
 						"R [%2d]", id);
@@ -1017,10 +1011,8 @@ static irqreturn_t mms_ts_interrupt(int irq, void *dev_id)
 				if (info->finger_state[id] != 0) {
 					info->finger_state[id] = 0;
 
-#ifdef CONFIG_AGNI_OMNI_MODE
 					// report state to cypress-touchkey for backlight timeout
 					touchscreen_state_report(0);
-#endif
 
 #ifdef CONFIG_LCD_FREQ_SWITCH
 					dev_notice(&client->dev,
@@ -1038,10 +1030,8 @@ static irqreturn_t mms_ts_interrupt(int irq, void *dev_id)
 				if (info->finger_state[id] != 0) {
 					info->finger_state[id] = 0;
 
-#ifdef CONFIG_AGNI_OMNI_MODE
 					// report state to cypress-touchkey for backlight timeout
 					touchscreen_state_report(0);
-#endif
 
 					dev_notice(&client->dev,
 						"R [%2d],([%4d],[%3d]),S:%d W:%d",
@@ -1074,10 +1064,8 @@ static irqreturn_t mms_ts_interrupt(int irq, void *dev_id)
 			if (info->finger_state[id] == 0) {
 				info->finger_state[id] = 1;
 
-#ifdef CONFIG_AGNI_OMNI_MODE
 				// report state to cypress-touchkey for backlight timeout
 				touchscreen_state_report(1);
-#endif
 
 #ifdef CONFIG_LCD_FREQ_SWITCH
 				dev_notice(&client->dev,
@@ -1092,10 +1080,8 @@ static irqreturn_t mms_ts_interrupt(int irq, void *dev_id)
 			if (info->finger_state[id] == 0) {
 				info->finger_state[id] = 1;
 
-#ifdef CONFIG_AGNI_OMNI_MODE
 				// report state to cypress-touchkey for backlight timeout
 				touchscreen_state_report(1);
-#endif
 
 #ifdef CONFIG_LCD_FREQ_SWITCH
 				dev_notice(&client->dev,
@@ -1128,10 +1114,8 @@ static irqreturn_t mms_ts_interrupt(int irq, void *dev_id)
 			if (info->finger_state[id] == 0) {
 				info->finger_state[id] = 1;
 
-#ifdef CONFIG_AGNI_OMNI_MODE				
 				// report state to cypress-touchkey for backlight timeout
 				touchscreen_state_report(1);
-#endif
 
 				dev_notice(&client->dev,
 					"P [%2d]", id);
@@ -1140,10 +1124,8 @@ static irqreturn_t mms_ts_interrupt(int irq, void *dev_id)
 			if (info->finger_state[id] == 0) {
 				info->finger_state[id] = 1;
 
-#ifdef CONFIG_AGNI_OMNI_MODE				
 				// report state to cypress-touchkey for backlight timeout
 				touchscreen_state_report(1);
-#endif
 
 				dev_notice(&client->dev,
 					"P [%2d],([%4d],[%3d]),S:%d W:%d",

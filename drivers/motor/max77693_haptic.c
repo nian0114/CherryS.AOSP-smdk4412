@@ -3,11 +3,14 @@
  *
  * Copyright (C) 2011 ByungChang Cha <bc.cha@samsung.com>
  * Copyright (C) 2012 The CyanogenMod Project
- *                    Daniel Hillenbrand <codeworkx@cyanogenmod.com>
+ *                    Daniel Hillenbrand <codeworkx@cyanogenmod.org>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License version 2 as
  * published by the Free Software Foundation.
+ *
+ * max77693_haptic: added CM's alternative vibrator config path
+ in sysfs (psndna88)
  */
 
 #include <linux/module.h>
@@ -260,67 +263,50 @@ void vibtonz_pwm(int nForce)
 EXPORT_SYMBOL(vibtonz_pwm);
 #endif
 
-#ifdef CONFIG_AGNI_OMNI_MODE
-static ssize_t pwm_val_show(struct device *dev,
-#else
 static ssize_t pwm_value_show(struct device *dev,
-#endif
 		struct device_attribute *attr, char *buf)
 {
 	int count;
 
-    pwm_val = ((pwm_duty - 18525) * 100) / 18525;
+	pwm_val = ((pwm_duty - 18525) * 100) / 18525;
 
 	count = sprintf(buf, "%lu\n", pwm_val);
-	pr_debug("[VIB] pwm_val: %lu\n", pwm_val);
+	pr_debug("[VIB] pwm_value: %lu\n", pwm_val);
 
 	return count;
 }
 
-#ifdef CONFIG_AGNI_OMNI_MODE
-ssize_t pwm_val_store(struct device *dev,
-#else
 ssize_t pwm_value_store(struct device *dev,
-#endif
 		struct device_attribute *attr,
 		const char *buf, size_t size)
 {
 	if (kstrtoul(buf, 0, &pwm_val))
 		pr_err("[VIB] %s: error on storing pwm_val\n", __func__); 
 
-#ifdef CONFIG_AGNI_OMNI_MODE
-    pr_info("[VIB] %s: pwm_val=%lu\n", __func__, pwm_val);
-#else
-    pr_info("[VIB] %s: pwm_value=%lu\n", __func__, pwm_val);
-#endif
+	pr_info("[VIB] %s: pwm_value=%lu\n", __func__, pwm_val);
 
-    pwm_duty = (pwm_val * 18525) / 100 + 18525;
+	pwm_duty = (pwm_val * 18525) / 100 + 18525;
 
-    /* make sure new pwm duty is in range */
-    if(pwm_duty > 37050) 
-    {   
-        pwm_duty = 37050;
-    } 
-    else if (pwm_duty < 18525) 
-    {
-        pwm_duty = 18525;
-    }
+	/* make sure new pwm duty is in range */
+	if(pwm_duty > 37050)
+	{
+		pwm_duty = 37050;
+	}
+	else if (pwm_duty < 18525)
+	{
+		pwm_duty = 18525;
+	}
 
 	pr_info("[VIB] %s: pwm_duty=%d\n", __func__, pwm_duty);
 
 	return size;
 }
-
-#ifdef CONFIG_AGNI_OMNI_MODE
-static DEVICE_ATTR(pwm_val, S_IRUGO | S_IWUSR,
-		pwm_val_show, pwm_val_store);
-#else
 static DEVICE_ATTR(pwm_value, S_IRUGO | S_IWUSR,
 		pwm_value_show, pwm_value_store);
-#endif
 
+static DEVICE_ATTR(pwm_val, S_IRUGO | S_IWUSR,
+		pwm_value_show, pwm_value_store);
 
-#ifdef CONFIG_AGNI_OMNI_MODE
 static int create_vibrator_sysfs(void)
 {
 	int ret;
@@ -338,7 +324,6 @@ static int create_vibrator_sysfs(void)
 
 	return 0;
 }
-#endif
 
 static int max77693_haptic_probe(struct platform_device *pdev)
 {
@@ -402,9 +387,7 @@ static int max77693_haptic_probe(struct platform_device *pdev)
 	hap_data->tout_dev.get_time = haptic_get_time;
 	hap_data->tout_dev.enable = haptic_enable;
 
-#ifdef CONFIG_AGNI_OMNI_MODE
     create_vibrator_sysfs();
-#endif
 
 #ifdef CONFIG_ANDROID_TIMED_OUTPUT
 	error = timed_output_dev_register(&hap_data->tout_dev);
@@ -413,16 +396,14 @@ static int max77693_haptic_probe(struct platform_device *pdev)
 		error = -EFAULT;
 		goto err_timed_output_register;
 	}
-#ifndef CONFIG_AGNI_OMNI_MODE
-/* User controllable pwm level */
+
+	pr_err("[VIB] timed_output device is registrated\n");
+
+	/* User controllable pwm level */
 	error = device_create_file(hap_data->tout_dev.dev, &dev_attr_pwm_value);
 	if (error < 0) {
 		pr_err("[VIB] create sysfs fail: pwm_value\n");
 	}
-#endif
-#endif
-#ifdef CONFIG_AGNI_OMNI_MODE
-	pr_err("[VIB] timed_output device is registrated\n");
 #endif
 	pr_debug("[VIB] -- %s\n", __func__);
 

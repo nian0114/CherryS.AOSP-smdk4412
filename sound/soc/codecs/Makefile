@@ -76,7 +76,15 @@ snd-soc-wm8993-objs := wm8993.o
 ifeq ($(CONFIG_MACH_KONA),y)
 snd-soc-wm8994-objs := wm8994_kona.o wm8994-tables.o wm8958-dsp2.o
 else
-snd-soc-wm8994-objs := wm8994.o wm8994-tables.o wm8958-dsp2.o boeffla_sound.o
+ifeq ($(CONFIG_SND_BOEFFLA),y)
+snd-soc-wm8994-objs += wm8994.o wm8994-tables.o wm8958-dsp2.o boeffla_sound.o
+else
+ifeq ($(CONFIG_SND_WOLFSON_SOUND_CONTROL),y)
+snd-soc-wm8994-objs += wm8994.o wm8994-tables.o wm8958-dsp2.o sound_control.o
+else
+snd-soc-wm8994-objs := wm8994.o wm8994-tables.o wm8958-dsp2.o
+endif
+endif
 endif
 snd-soc-wm8995-objs := wm8995.o
 snd-soc-wm9081-objs := wm9081.o

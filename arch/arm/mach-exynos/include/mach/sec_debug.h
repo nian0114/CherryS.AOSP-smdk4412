@@ -4,6 +4,8 @@
 #include <linux/sched.h>
 #include <linux/semaphore.h>
 
+#ifdef CONFIG_SEC_DEBUG
+
 union sec_debug_level_t {
 	struct {
 		u16 kernel_fault;
@@ -14,7 +16,6 @@ union sec_debug_level_t {
 
 extern union sec_debug_level_t sec_debug_level;
 
-#ifdef CONFIG_SEC_DEBUG
 extern int sec_debug_init(void);
 
 extern int sec_debug_magic_init(void);
